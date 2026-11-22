@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.env
+.env.*
+credentials.json
+settings.local.json
+.DS_Store
+node_modules/
+.claude/
+.agents/
+.gemini/
