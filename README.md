@@ -8,6 +8,11 @@ use permitted browser automation, handle games and peer dependencies, create the
 requested artifact or service, and verify the result. It produces solutions, not
 just hints. It does not build a class-wide solver or change your agent's permissions.
 
+**Fast by default:** read the needed input, solve, make one quick format check and
+return the answer. No routine second solution, extra tool calls, reviewer agents,
+test suites, screenshots or broad research. Deeper checking is reserved for an
+observed failure, your explicit request or a genuinely required contract step.
+
 ## Install with your AI agent
 
 **Paste this message into your agent:**

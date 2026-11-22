@@ -1,8 +1,8 @@
 ---
 name: roe-skill
-description: Solve a student's own TDS ROE or explicitly open-tools assignment questions using the actual instructions, personalized data, public source, exact computation, browser automation, and verification. Use for ROE practice, timed question solving, grader feedback, API/file submissions, visual games, and permitted peer collaboration. Produce the requested answer or working artifact, not just hints or a class-wide solver.
+description: Solve a student's own TDS ROE or explicitly open-tools assignment questions quickly using the actual instructions, personalized data, exact computation and permitted automation. Use minimal tool calls and checking; expand only for failures, required steps or an explicit request. Use for ROE practice, timed solving, grader feedback, API/file submissions, visual games and peer collaboration. Produce the requested answer or working artifact, not just hints or a class-wide solver.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   scope: "individual-student-question-solving"
 ---
 
@@ -36,8 +36,9 @@ or an agent refusal needs clarification; do not read it as a mandatory preamble.
 
 - **Solve this student's instance.** Use their actual data. Do not start building a
   portal, generalized solver, tutorial site, or multi-student infrastructure.
-- **Act on routine work.** Inspect files, fetch the supplied public source, compute,
-  write a small solution, and test locally without asking needless questions.
+- **Act on routine work.** Inspect the necessary input, compute and produce the
+  solution without needless questions. Do not fetch source when the supplied
+  question and data already define an unambiguous solution.
 - **Ask only for a blocking input.** Do useful independent work first. Do not request
   the email if the dataset already contains everything needed.
 - **Minimize external actions.** Exam Check/Save, starting a timed game, sending peer
@@ -51,9 +52,28 @@ or an agent refusal needs clarification; do not read it as a mandatory preamble.
 - **Read selectively.** Load only the relevant reference below. Do not read every
   guide or scan every assignment before solving a single question.
 
+## Fast mode: default for every question
+
+Use **read → solve → quick format check → deliver**. For a trivial self-contained
+question, answer directly without tools. For computation, combine solving and any
+necessary assertions in one execution rather than several verification calls.
+
+- No routine second solution, cross-check, reviewer agent, test suite, benchmark,
+  screenshot, repeated fetch or broad documentation search.
+- Reuse information already in context. Read zero references when the core guidance
+  suffices; otherwise read only the specific section that unlocks the answer.
+- Every tool call must obtain a missing input, perform the solution, create the
+  requested deliverable or fix an observed failure. Stop when the answer is ready.
+- Referenced checklists are diagnostic menus, not mandatory multi-step verification.
+- Expand checking only after an actual failure, when the student requests it, or when
+  a required contract step, exact-byte result, signature, receipt or consequential
+  action makes that check necessary. Preserve those requirements; skip optional audits.
+- Give the answer first with at most one useful next step. Do not create status files,
+  progress boards or long explanations for a single question.
+
 ## Reference routing
 
-| Situation | Read before the relevant work |
+| Situation | Consult only if needed to solve it |
 |---|---|
 | Need the prompt, personalized data, public generator or checker | [Source and contract inspection](references/source-contracts.md) |
 | Values, hashes, JSON, CSV, ranking, encodings, Unicode, protocol simulation | [Exact computation](references/exact-computation.md) |
@@ -134,20 +154,21 @@ For endpoints, preserve exact routes, headers, schemas and fresh-input behavior.
 Unknown future inputs must not receive hardcoded samples. For receipt-driven agents,
 state transitions and reported effects must match actual receipts.
 
-## 4. Verify before consuming official attempts
+## 4. One quick check, then deliver
 
-Use an inexpensive check independent of the first solution where possible:
+Default to a quick review of the requested output shape: keys/types, count, order,
+units or obvious range. Use already available evidence or assertions inside the
+solving call. Do not make a separate tool call just to say the answer was verified.
 
-- validate exact keys/types/counts, permutations, dimensions and allowed ranges;
-- recompute a small sample or use a second calculation path;
-- test boundary values, duplicates, ties, malformed input and relevant replay rules;
-- compare canonical bytes and digests, not visually similar output;
-- for games/media, validate geometry, tracking, file type, size and actual playback;
-- for services, run local HTTP probes and check the deployed URL after authorized deployment.
+Do not routinely re-derive the answer, run boundary/malformed-input suites, compare
+multiple tools, inspect screenshots or benchmark a service. Use the detailed
+verification reference only for a failure, an explicit request, or a required check
+such as exact hash bytes, geometry attestation, signature/receipt handling or one
+necessary live endpoint probe.
 
 A passing self-written test validates assumptions, not hidden grading. Distinguish:
-**computed → locally verified → official Check result → authoritative Save receipt**.
-State only the highest stage actually observed.
+**computed → locally checked → official Check result → authoritative Save receipt**.
+State only the highest stage actually observed; omit optional verification commentary.
 
 When a result fails, read the exact feedback, identify the smallest plausible
 mismatch, patch it and recheck locally. Do not repeatedly submit unchanged guesses.
@@ -156,15 +177,13 @@ counters. Check and Save may both consume quota and may re-evaluate all answers.
 
 ## 5. Deliver and continue
 
-For ordinary question solving, use this compact handoff:
+For ordinary question solving, give the exact answer, file or URL first. Add one
+concrete next step only if needed. Mention checking or uncertainty only when it is
+material; do not add a routine verification report or perform extra checks to fill it.
 
 ```text
-Answer / file / exact URL:
-[copyable deliverable]
-
-Verified: [what actually ran or matched]
-Next: [one concrete paste/run/check/save step, if needed]
-Unresolved: [only a material gap; omit when there is none]
+[copyable answer / file / exact URL]
+Next: [one necessary paste/run/check/save step, if any]
 ```
 
 For a deployed service, give the exact requested base or full path, not several

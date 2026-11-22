@@ -1,5 +1,14 @@
 # Verification, grader feedback and submission
 
+## Minimal checking is the default
+
+For normal solving, use one quick format review or assertions inside the solving
+call, then deliver. Do not load this reference for every answer, solve twice, run
+reviewer agents or make separate verification calls without a concrete need.
+The checks below are a diagnostic menu for an observed failure, explicit request,
+or contract-required check—not a routine test suite. Required authentication,
+signature, receipt and submission safeguards still apply.
+
 ## Four distinct evidence stages
 
 | Stage | Meaning | Does not establish |
@@ -19,7 +28,8 @@ For a value/JSON answer:
 - exact schema, no extra/duplicate keys where forbidden;
 - expected count, unique IDs, permutations, dimensions and allowed ranges;
 - source-specified arithmetic, rounding, order and canonicalization;
-- one independently computed sample or invariant.
+- use the result from the solving pass; independently recompute only if a specific
+  discrepancy or high-consequence requirement makes it necessary.
 
 For an endpoint:
 
@@ -43,7 +53,8 @@ an elaborate test framework for one answer.
 1. Confirm the student approved this question's Check or a bounded set of checks.
 2. Read the current attempt/cooldown counter where available. Another tab can have
    consumed attempts. Do not assume historical unlimited retries.
-3. Verify the answer offline and keep a copy of the exact submitted value.
+3. Do the quick required format check and retain the exact submitted value. Do not
+   add an independent verification pass merely because Check is next.
 4. Establish whether Check starts a costly/live evaluation and how long it may take.
 5. Preserve enough quota/time for required Save. A Save can recheck every answered
    restricted question and consume one allowance for each.

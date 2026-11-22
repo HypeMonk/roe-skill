@@ -8,8 +8,10 @@ an attempt or game to discover its clock without permission. Use server deadline
 when available; the student's local clock may differ.
 
 For one question, solve it immediately. Do not demand the entire paper before
-answering a self-contained question. For a supplied full paper, scan once for
-weights, output modes and dependencies, then choose an order.
+answering a self-contained question. Use the minimal tool path and one quick format
+check; skip routine reference loading, repeated calculations and optional audits.
+For a supplied full paper, scan once for weights, output modes and dependencies,
+then choose an order.
 
 ## Triage by deliverable and bottleneck
 
